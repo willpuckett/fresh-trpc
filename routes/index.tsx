@@ -2,7 +2,7 @@ import {
   createTRPCProxyClient,
   httpBatchLink,
   loggerLink,
-} from "@trpc/client@10.11.1";
+} from "@trpc/client/";
 import type { AppRouter } from '../trpc_router.ts';
 
 const sleep = (ms = 100) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -30,13 +30,12 @@ export async function handler (req: Request) {
     title: 'hello client',
   });
   console.log('created post', postCreate.title);
-  await sleep();
+  // await sleep();
 
   const postList = await proxy.post.listPosts.query();
-  console.log('has posts', postList, 'first:', postList[0].title);
-  await sleep();
-
-  console.log('👌 should be a clean exit if everything is working right');
+  
+  console.log('👌');
+  return Response.json({postList})
 }
 
 

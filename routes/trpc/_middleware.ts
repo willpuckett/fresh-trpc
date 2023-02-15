@@ -1,4 +1,4 @@
-import { fetchRequestHandler } from "@trpc/server@10.11.1/adapters/fetch";
+import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { appRouter } from '../../trpc_router.ts';
 
 export function handler(
