@@ -1,11 +1,4 @@
-# fresh project
+# Fresh with tRPC
 
-### Usage
+Runs locally but not yet on Deno Deploy.
 
-Start the project:
-
-```
-deno task start
-```
-
-This will watch the project directory and restart as necessary.
