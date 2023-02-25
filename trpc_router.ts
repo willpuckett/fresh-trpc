@@ -36,6 +36,19 @@ export const appRouter = router({
   hello: publicProcedure.input(z.string().nullish()).query(({ input }) => {
     return `hello ${input ?? 'world'}`;
   }),
+    herro: publicProcedure
+    .input(
+      z
+        .object({
+          text: z.string(),
+        })
+        .optional(),
+    )
+    .query(({ input }) => {
+      return {
+        greeting: `hello ${input?.text ?? 'world'}`,
+      };
+    }),
 });
 
 export type AppRouter = typeof appRouter;

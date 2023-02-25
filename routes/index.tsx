@@ -29,8 +29,6 @@ export async function handler (req: Request) {
   const postCreate = await proxy.post.createPost.mutate({
     title: 'hello client',
   });
-  console.log('created post', postCreate.title);
-  // await sleep();
 
   const postList = await proxy.post.listPosts.query();
   
