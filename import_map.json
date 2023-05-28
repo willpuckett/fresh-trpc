@@ -8,8 +8,8 @@
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.2.3",
     "twind": "https://esm.sh/twind@0.16.19",
     "twind/": "https://esm.sh/twind@0.16.19/",
-    "zod": "https://esm.sh/zod@3.20.6",
-    "@trpc/server/": "https://esm.sh/@trpc/server@10.11.1/",
-    "@trpc/client/": "https://esm.sh/@trpc/client@10.11.1/"
+    "zod": "https://esm.sh/zod@3.21.4",
+    "@trpc/server/": "https://esm.sh/@trpc/server@10.28.0/",
+    "@trpc/client/": "https://esm.sh/@trpc/client@10.28.0/"
   }
 }
