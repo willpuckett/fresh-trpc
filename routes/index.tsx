@@ -22,12 +22,12 @@ export async function handler (req: Request) {
   await sleep();
 
   // parallel queries
-  // await Promise.all([
-  //   //
-  //   proxy.hello.query(),
-  //   proxy.hello.query('client'),
-  // ]);
-  // await sleep();
+  await Promise.all([
+    //
+    proxy.hello.query(),
+    proxy.hello.query('client'),
+  ]);
+  await sleep();
 
   const postCreate = await proxy.post.createPost.mutate({
     title: 'hello client',
