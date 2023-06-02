@@ -55,4 +55,10 @@ export const appRouter = router({
   hello: helloRouter,
 });
 
+export const caller = appRouter.createCaller({});
+
 export type AppRouter = typeof appRouter;
+
+
+const result = await caller.hello.hello("world");
+console.log(result);

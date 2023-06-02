@@ -2,6 +2,7 @@ import {
   createTRPCProxyClient,
   httpBatchLink,
   loggerLink,
+  createTRPCUntypedClient
 } from "@trpc/client/";
 import type { AppRouter } from './trpc_router.ts';
 
