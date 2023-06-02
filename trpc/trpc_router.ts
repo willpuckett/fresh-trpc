@@ -1,5 +1,5 @@
-import { initTRPC } from '@trpc/server/';
-import { z } from 'zod';
+import { initTRPC } from "@trpc/server/";
+import { z } from "zod";
 
 let id = 0;
 
@@ -7,7 +7,7 @@ const db = {
   posts: [
     {
       id: ++id,
-      title: 'hello',
+      title: "hello",
     },
   ],
 };
@@ -31,12 +31,11 @@ const postRouter = router({
   listPosts: publicProcedure.query(() => db.posts),
 });
 
-export const appRouter = router({
-  post: postRouter,
+const helloRouter = router({
   hello: publicProcedure.input(z.string().nullish()).query(({ input }) => {
-    return `hello ${input ?? 'world'}`;
+    return `hello ${input ?? "world"}`;
   }),
-    herro: publicProcedure
+  olleh: publicProcedure
     .input(
       z
         .object({
@@ -46,9 +45,14 @@ export const appRouter = router({
     )
     .query(({ input }) => {
       return {
-        greeting: `hello ${input?.text ?? 'world'}`,
+        greeting: `hello ${input?.text ?? "world"}`,
       };
     }),
+});
+
+export const appRouter = router({
+  post: postRouter,
+  hello: helloRouter,
 });
 
 export type AppRouter = typeof appRouter;

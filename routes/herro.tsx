@@ -1,31 +1,23 @@
-import {createTRPCProxyClient,httpBatchLink,loggerLink} from "@trpc/client/";
-import type { AppRouter } from '../trpc_router.ts';
 import {HandlerContext, PageProps} from "$fresh/server.ts"
+import { trpc } from '../trpc/proxy.ts';
 
 interface Data {
-    her: {
+    herro: {
         greeting: string;
     }
 }
 
 export async function handler(req: Request, ctx: HandlerContext) {
-    const requrl = new URL(req.url);
-    const text =  requrl.searchParams.get("text");
+    const text = new URL(req.url).searchParams.get("text");
 
-    const url = `${requrl.origin}/trpc`;
-
-    const proxy = createTRPCProxyClient<AppRouter>({
-        links: [loggerLink(), httpBatchLink({ url })],
-    });
-
-    const her = await proxy.herro.query(text ? {text} : undefined)
+    const herro = await trpc.hello.olleh.query(text ? {text} : undefined)
 
 
-    return ctx.render({her})
+    return ctx.render({herro})
 }
 
 export default function Page({ data }: PageProps<Data>) {
-    const { her } = data;
+    const { herro } = data;
     return (
         <div>
             <form>
@@ -33,7 +25,7 @@ export default function Page({ data }: PageProps<Data>) {
                 <button type="submit">Search</button>
             </form>
             <ul>
-               {her.greeting}
+               {herro.greeting}
             </ul>
         </div>
     );

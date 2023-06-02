@@ -1,35 +1,24 @@
-import {
-  createTRPCProxyClient,
-  httpBatchLink,
-  loggerLink,
-} from "@trpc/client/";
-import type { AppRouter } from '../trpc_router.ts';
+import { trpc } from '../trpc/proxy.ts';
 
 const sleep = (ms = 100) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export async function handler (req: Request) {
-  const url = new URL(req.url)
-  url.pathname = '/trpc'
-
-  const proxy = createTRPCProxyClient<AppRouter>({
-    links: [loggerLink(), httpBatchLink({ url: url.href })],
-  });
 
   await sleep();
 
   // parallel queries
   await Promise.all([
     //
-    proxy.hello.query(),
-    proxy.hello.query('client'),
+    trpc.hello.hello.query(),
+    trpc.hello.hello.query('client'),
   ]);
   await sleep();
 
-  const postCreate = await proxy.post.createPost.mutate({
+  const postCreate = await trpc.post.createPost.mutate({
     title: 'hello client',
   });
 
-  const postList = await proxy.post.listPosts.query();
+  const postList = await trpc.post.listPosts.query();
   
   console.log('👌');
   return Response.json({postList})
