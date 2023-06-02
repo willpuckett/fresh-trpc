@@ -21,8 +21,8 @@ export default function Page({ data }: PageProps<Data>) {
     return (
         <div>
             <form>
-                <input type="text" name=""/>
-                <button type="submit">Search</button>
+                <input type="text" name="text"/>
+                <button type="submit">Say my name!</button>
             </form>
             <ul>
                {herro.greeting}
