@@ -1,4 +1,4 @@
 # Fresh with tRPC
 
-Runs locally but not yet on Deno Deploy.
+Deno Deploy (reasonably) doesn't like recursive routes. You must use createCaller to fetch data server side. 
 
