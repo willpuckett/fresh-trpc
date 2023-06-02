@@ -8,10 +8,6 @@ import type { AppRouter } from '../trpc_router.ts';
 const sleep = (ms = 100) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export async function handler (req: Request) {
-  // const requrl = new URL(req.url);
-
-  // const url = `${requrl.origin}/trpc`;
-
   const url = new URL(req.url)
   url.pathname = '/trpc'
 
