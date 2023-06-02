@@ -1,21 +1,21 @@
-import { initTRPC } from "@trpc/server/";
-import { z } from "zod";
+import { initTRPC } from '@trpc/server/'
+import { z } from 'zod'
 
-let id = 0;
+let id = 0
 
 const db = {
   posts: [
     {
       id: ++id,
-      title: "hello",
+      title: 'hello',
     },
   ],
-};
+}
 
-const t = initTRPC.create();
+const t = initTRPC.create()
 
-const publicProcedure = t.procedure;
-const router = t.router;
+const publicProcedure = t.procedure
+const router = t.router
 
 const postRouter = router({
   createPost: publicProcedure
@@ -24,16 +24,16 @@ const postRouter = router({
       const post = {
         id: ++id,
         ...input,
-      };
-      db.posts.push(post);
-      return post;
+      }
+      db.posts.push(post)
+      return post
     }),
   listPosts: publicProcedure.query(() => db.posts),
-});
+})
 
 const helloRouter = router({
   hello: publicProcedure.input(z.string().nullish()).query(({ input }) => {
-    return `hello ${input ?? "world"}`;
+    return `hello ${input ?? 'world'}`
   }),
   olleh: publicProcedure
     .input(
@@ -45,20 +45,14 @@ const helloRouter = router({
     )
     .query(({ input }) => {
       return {
-        greeting: `hello ${input?.text ?? "world"}`,
-      };
+        greeting: `hello ${input?.text ?? 'world'}`,
+      }
     }),
-});
+})
 
 export const appRouter = router({
   post: postRouter,
   hello: helloRouter,
-});
+})
 
-export const caller = appRouter.createCaller({});
-
-export type AppRouter = typeof appRouter;
-
-
-const result = await caller.hello.hello("world");
-console.log(result);
+export type AppRouter = typeof appRouter
