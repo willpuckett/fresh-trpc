@@ -1,5 +1,5 @@
-import { createTRPCProxyClient, httpBatchLink, loggerLink } from '@trpc/client/'
-import type { AppRouter } from './trpc_router.ts'
+import { createTRPCProxyClient, httpBatchLink, loggerLink } from '@trpc/client'
+import type { AppRouter } from './router.ts'
 
 const where = window.location
   ? window.location?.origin

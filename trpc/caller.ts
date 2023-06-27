@@ -1,3 +1,3 @@
-import { appRouter } from './trpc_router.ts'
+import { appRouter } from './router.ts'
 
 export const caller = appRouter.createCaller({})

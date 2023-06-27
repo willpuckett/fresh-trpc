@@ -2,25 +2,33 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import config from './deno.json' assert { type: 'json' }
-import * as $0 from './routes/api/[trpc].ts'
-import * as $1 from './routes/clientSide.tsx'
-import * as $2 from './routes/hello.tsx'
-import * as $3 from './routes/index.tsx'
-import * as $$0 from './islands/clientSide.tsx'
+import * as $0 from './routes/_app.tsx'
+import * as $1 from './routes/api/[trpc].ts'
+import * as $2 from './routes/client.tsx'
+import * as $3 from './routes/example.tsx'
+import * as $4 from './routes/hello.tsx'
+import * as $5 from './routes/index.tsx'
+import * as $6 from './routes/query.tsx'
+import * as $$0 from './islands/Provider.tsx'
+import * as $$1 from './islands/clientSide.tsx'
+import * as $$2 from './islands/query.tsx'
 
 const manifest = {
   routes: {
-    './routes/api/[trpc].ts': $0,
-    './routes/clientSide.tsx': $1,
-    './routes/hello.tsx': $2,
-    './routes/index.tsx': $3,
+    './routes/_app.tsx': $0,
+    './routes/api/[trpc].ts': $1,
+    './routes/client.tsx': $2,
+    './routes/example.tsx': $3,
+    './routes/hello.tsx': $4,
+    './routes/index.tsx': $5,
+    './routes/query.tsx': $6,
   },
   islands: {
-    './islands/clientSide.tsx': $$0,
+    './islands/Provider.tsx': $$0,
+    './islands/clientSide.tsx': $$1,
+    './islands/query.tsx': $$2,
   },
   baseUrl: import.meta.url,
-  config,
 }
 
 export default manifest
