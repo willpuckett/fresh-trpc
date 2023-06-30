@@ -1,3 +1,3 @@
-import Query from "../islands/Query.tsx"
+import Query from '../islands/Query.tsx'
 
 export default () => <Query />

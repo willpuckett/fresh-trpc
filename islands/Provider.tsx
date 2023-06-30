@@ -13,7 +13,7 @@ export default ({ children }: { children: ComponentChildren }) => {
       links: [
         loggerLink(),
         httpBatchLink({
-          url
+          url,
         }),
       ],
     })

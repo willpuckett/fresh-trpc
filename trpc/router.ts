@@ -9,10 +9,10 @@ const db = {
       id: ++id,
       title: 'hello',
     },
-    { 
+    {
       id: ++id,
-      title: "Wouldn't you like to know?"
-    }
+      title: 'Wouldn\'t you like to know?',
+    },
   ],
 }
 

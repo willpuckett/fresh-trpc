@@ -19,7 +19,7 @@ export default function Page({ data }: PageProps<Data>) {
     <div>
       <form>
         <input class='border-1' type='text' name='text' />
-        <button type='submit'>Say my name!</button>
+        <button class='border-1' type='submit'>Say my name!</button>
       </form>
       <ul>
         {hello.greeting}
