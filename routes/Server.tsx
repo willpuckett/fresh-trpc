@@ -18,7 +18,7 @@ export default function Page({ data }: PageProps<Data>) {
   return (
     <div>
       <form>
-        <input type='text' name='text' />
+        <input class='border-1' type='text' name='text' />
         <button type='submit'>Say my name!</button>
       </form>
       <ul>

@@ -1,22 +1,9 @@
-import { caller } from '../trpc/caller.ts'
-
-const sleep = (ms = 100) => new Promise((resolve) => setTimeout(resolve, ms))
-
-export const handler = async (req: Request) => {
-  await sleep()
-
-  await Promise.all([
-    caller.hello.hello(),
-    caller.hello.hello('client'),
-  ])
-  await sleep()
-
-  await caller.post.createPost({
-    title: 'hello client',
-  })
-
-  const postList = await caller.post.listPosts()
-
-  console.log('👌')
-  return Response.json({ postList })
-}
+export default () =>
+  <>
+    <p>This is a sample of using tRPC with Fresh</p>
+    <ul>
+      <li><a class='text-blue-500' href="/Server">Server Side</a></li>
+      <li><a class='text-blue-500' href="/Client">Client Side</a></li>
+      <li><a class='text-blue-500' href="/Query">React Query Integration</a></li>
+    </ul>
+  </>

@@ -9,6 +9,10 @@ const db = {
       id: ++id,
       title: 'hello',
     },
+    { 
+      id: ++id,
+      title: "Wouldn't you like to know?"
+    }
   ],
 }
 
@@ -18,7 +22,7 @@ const publicProcedure = t.procedure
 const router = t.router
 
 const postRouter = router({
-  createPost: publicProcedure
+  create: publicProcedure
     .input(z.object({ title: z.string() }))
     .mutation(({ input }) => {
       const post = {
@@ -28,7 +32,7 @@ const postRouter = router({
       db.posts.push(post)
       return post
     }),
-  listPosts: publicProcedure.query(() => db.posts),
+  list: publicProcedure.query(() => db.posts),
 })
 
 const helloRouter = router({

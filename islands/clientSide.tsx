@@ -1,6 +1,6 @@
 import { useSignal } from '@preact/signals'
-import { proxy } from '../trpc/proxy.ts'
 import { useEffect } from 'preact/hooks'
+import { proxy } from '../trpc/proxy.ts'
 
 export default function clientSide() {
   const hello = useSignal('')
