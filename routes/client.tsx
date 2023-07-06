@@ -1,5 +1,9 @@
+import Nav from '../components/Nav.tsx'
 import ClientSide from '../islands/ClientSide.tsx'
 
-export default function () {
-  return <ClientSide />
-}
+export default () => (
+  <>
+    <Nav />
+    <ClientSide />
+  </>
+)

@@ -1,20 +1,7 @@
 import { initTRPC } from '@trpc/server'
+import { db } from './kvdex.ts'
+import { Post } from './kvdex.ts'
 import { z } from 'zod'
-
-let id = 0
-
-const db = {
-  posts: [
-    {
-      id: ++id,
-      title: 'hello',
-    },
-    {
-      id: ++id,
-      title: 'Wouldn\'t you like to know?',
-    },
-  ],
-}
 
 const t = initTRPC.create()
 
@@ -23,40 +10,19 @@ const router = t.router
 
 const postRouter = router({
   create: publicProcedure
-    .input(z.object({ title: z.string() }))
-    .mutation(({ input }) => {
-      const post = {
-        id: ++id,
-        ...input,
-      }
-      db.posts.push(post)
+    .input(Post)
+    .mutation(async ({ input }) => {
+      const post = await db.posts.add(input)
       return post
     }),
-  list: publicProcedure.query(() => db.posts),
-})
-
-const helloRouter = router({
-  hello: publicProcedure.input(z.string().nullish()).query(({ input }) => {
-    return `hello ${input ?? 'world'}`
+  list: publicProcedure.query(async () => await db.posts.getMany()),
+  delete: publicProcedure.input(z.string()).mutation(async ({ input }) => {
+    await db.posts.delete(input)
   }),
-  olleh: publicProcedure
-    .input(
-      z
-        .object({
-          text: z.string(),
-        })
-        .optional(),
-    )
-    .query(({ input }) => {
-      return {
-        greeting: `hello ${input?.text ?? 'world'}`,
-      }
-    }),
 })
 
 export const appRouter = router({
   post: postRouter,
-  hello: helloRouter,
 })
 
 export type AppRouter = typeof appRouter

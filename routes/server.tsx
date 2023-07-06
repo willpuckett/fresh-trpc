@@ -1,29 +1,43 @@
 import { HandlerContext, PageProps } from '$fresh/server.ts'
 import { caller } from '../trpc/caller.ts'
+import type { inferRouterOutputs } from '@trpc/server'
+import type { AppRouter } from '../trpc/router.ts'
+import Nav from '../components/Nav.tsx'
+
+type RouterOutput = inferRouterOutputs<AppRouter>
 
 interface Data {
-  hello: {
-    greeting: string
-  }
+  posts: RouterOutput['post']['list']
 }
 
 export async function handler(req: Request, ctx: HandlerContext) {
-  const text = new URL(req.url).searchParams.get('text')
-  const hello = await caller.hello.olleh(text ? { text } : undefined)
-  return ctx.render({ hello })
+  const { searchParams } = new URL(req.url)
+  const post = searchParams.get('post')
+  if (post) await caller.post.create({ title: post })
+  const deleteID = searchParams.get('deleteID')
+  if (deleteID) await caller.post.delete(deleteID)
+  const posts = await caller.post.list()
+  return ctx.render({ posts })
 }
 
 export default function Page({ data }: PageProps<Data>) {
-  const { hello } = data
+  const { posts } = data
   return (
-    <div>
-      <form>
-        <input class='border-1' type='text' name='text' />
-        <button class='border-1' type='submit'>Say my name!</button>
-      </form>
-      <ul>
-        {hello.greeting}
-      </ul>
-    </div>
+    <>
+      <Nav />
+      <div>
+        <form>
+          <input class='border-1' type='text' name='post' />
+          <button class='border-1' type='submit'>Create Post!</button>
+        </form>
+        <ul>
+          {posts.map((post) => (
+            <li key={post.id}>
+              {post.value.title} <a href={`/server?deleteID=${post.id}`}>⌫</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   )
 }

@@ -2,8 +2,10 @@ import { signal } from '@preact/signals'
 import { trpc } from '../trpc/query.ts'
 
 export default () => {
-  const postCreator = trpc.post.create.useMutation()
-  const postList = trpc.post.list.useQuery()
+  const mutation = trpc.post.create.useMutation()
+  const { error, isLoading, refetch, data } = trpc.post.list.useQuery()
+  const { mutate: removePost, isLoading: removeIsLoading } = trpc.post.delete
+    .useMutation()
   const text = signal('')
 
   return (
@@ -18,14 +20,27 @@ export default () => {
       <button
         class='border-1'
         onClick={() => {
-          postCreator.mutate({ title: text.value })
-          setTimeout(() => postList.refetch(), 50)
+          mutation.mutate({ title: text.value }, { onSuccess: () => refetch() })
         }}
+        disabled={mutation.isLoading}
       >
         Create Post
       </button>
+      {isLoading && <div>Loading...</div>}
+      {error && <div>Error: {error.message}</div>}
       <ul>
-        {postList.data?.map((post) => <li key={post.id}>{post.title}</li>)}
+        {data?.map((post) => (
+          <li key={post.id}>
+            {post.value.title}
+            <button
+              onClick={() =>
+                removePost(post.id as string, { onSuccess: () => refetch() })}
+              disabled={removeIsLoading}
+            >
+              ⌫
+            </button>
+          </li>
+        ))}
       </ul>
     </div>
   )
