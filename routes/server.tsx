@@ -2,7 +2,6 @@ import { HandlerContext, PageProps } from '$fresh/server.ts'
 import { caller } from '../trpc/caller.ts'
 import type { inferRouterOutputs } from '@trpc/server'
 import type { AppRouter } from '../trpc/router.ts'
-import Nav from '../components/Nav.tsx'
 
 type RouterOutput = inferRouterOutputs<AppRouter>
 
@@ -20,12 +19,10 @@ export default function Page({ data: { posts } }: PageProps<{
   posts: RouterOutput['post']['list']
 }>) {
   return (
-    <>
-      <Nav />
       <div>
         <form>
           <input class='border-1' type='text' name='post' />
-          <button class='border-1' type='submit'>Create Post!</button>
+          <button class='border-1' type='submit'>Create Post</button>
         </form>
         <ul>
           {posts.map((post) => (
@@ -35,6 +32,5 @@ export default function Page({ data: { posts } }: PageProps<{
           ))}
         </ul>
       </div>
-    </>
   )
 }
