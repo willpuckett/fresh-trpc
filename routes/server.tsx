@@ -6,10 +6,6 @@ import Nav from '../components/Nav.tsx'
 
 type RouterOutput = inferRouterOutputs<AppRouter>
 
-interface Data {
-  posts: RouterOutput['post']['list']
-}
-
 export async function handler(req: Request, ctx: HandlerContext) {
   const { searchParams } = new URL(req.url)
   const post = searchParams.get('post')
@@ -20,8 +16,9 @@ export async function handler(req: Request, ctx: HandlerContext) {
   return ctx.render({ posts })
 }
 
-export default function Page({ data }: PageProps<Data>) {
-  const { posts } = data
+export default function Page({ data: { posts } }: PageProps<{
+  posts: RouterOutput['post']['list']
+}>) {
   return (
     <>
       <Nav />
