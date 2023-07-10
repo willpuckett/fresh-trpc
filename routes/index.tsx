@@ -39,7 +39,7 @@ export default function HomePage(props: PageProps<Data>) {
         </ul>
         <br />  
       <p>Provider: GitHub</p>
-      <p>Signed in: {isSignedIn ? 'Totally' : '❌'}</p>
+      <p>Signed in: {isSignedIn ? '✅' : '❌'}</p>
       <p>
         Your access token: {accessToken !== null
           ? (

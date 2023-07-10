@@ -10,6 +10,7 @@ export const oauth2Client = createGitHubOAuth2Client()
 export const createContext =  ({
   req,
   resHeaders, 
+
 }: FetchCreateContextFnOptions) => {
   // const {sessionId} = await handleCallback(req, oauth2Client );
   return {
@@ -29,7 +30,9 @@ const authRouter = router({
   callback: publicProcedure
     .query(async ({ ctx }) =>  {
     // Return object also includes `accessToken` and `sessionId` properties.
+    console.log('ctx.req.url', ctx.req.headers, '\nctx.resHeaders', ctx.resHeaders)
     const { response } = await handleCallback(ctx.req, oauth2Client)
+    console.log('response headers', response.headers)
     return response
   }),
   session: publicProcedure.query(async ({ctx}) => {
@@ -40,8 +43,19 @@ const authRouter = router({
     //   : null
     return sessionId
   }),
-  signin: publicProcedure.query(async ({ctx}) => await signIn(ctx.req, oauth2Client)),
-  signout: publicProcedure.query(async ({ctx}) => await signOut(ctx.req)),
+  signin: publicProcedure.query(async ({ctx}) => {
+    console.log('ctx.req.url', ctx.req.headers, '\nctx.resHeaders', ctx.resHeaders)
+    const response = await signIn(ctx.req, oauth2Client)
+    console.log('response headers', response.headers)
+    return response
+  }),
+  signout: publicProcedure.query(async ({ctx}) => {
+    console.log('ctx.req.url', ctx.req.headers, '\nctx.resHeaders', ctx.resHeaders)
+    
+   const response =  await signOut(ctx.req)
+  console.log('response headers', response.headers)
+  return response
+  }),
 })
 
 const postRouter = router({
