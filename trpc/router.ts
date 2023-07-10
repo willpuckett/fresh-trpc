@@ -12,7 +12,10 @@ import {
 } from 'kv_oauth'
 import type { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch'
 
-export const oauth2Client = createGitHubOAuth2Client({clientId: Deno.env.get('GITHUB_CLIENT_ID')!, clientSecret: Deno.env.get('GITHUB_CLIENT_SECRET')!})
+export const oauth2Client = createGitHubOAuth2Client({
+  clientId: Deno.env.get('GITHUB_CLIENT_ID')!,
+  clientSecret: Deno.env.get('GITHUB_CLIENT_SECRET')!,
+})
 
 export const createContext = ({
   req,
