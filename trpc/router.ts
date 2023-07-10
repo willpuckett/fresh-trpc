@@ -52,6 +52,7 @@ const authRouter = router({
     .query(async ({ ctx }) => {
       // Return object also includes `accessToken` and `sessionId` properties.
       const { response } = await handleCallback(ctx.req, oauth2Client)
+      console.log('response headers', response.headers)
       return response
     }),
   session: loggedProcedure.query(async ({ ctx }) => {
@@ -64,10 +65,12 @@ const authRouter = router({
   }),
   signin: loggedProcedure.query(async ({ ctx }) => {
     const response = await signIn(ctx.req, oauth2Client)
+    console.log('response headers', response.headers)
     return response
   }),
   signout: loggedProcedure.query(async ({ ctx }) => {
     const response = await signOut(ctx.req)
+    console.log('response headers', response.headers)
     return response
   }),
 })
