@@ -76,6 +76,8 @@ const authRouter = router({
     console.log('signout ctx', ctx)
     const response = await signOut(ctx.req)
     console.log('signout response ', response)
+    ctx.resHeaders.set('location', response.headers.get('location')!)
+    ctx.resHeaders.set('set-cookie', response.headers.get('set-cookie')!)
     return response
   }),
 })
