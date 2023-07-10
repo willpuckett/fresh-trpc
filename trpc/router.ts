@@ -2,12 +2,11 @@ import { initTRPC } from '@trpc/server'
 import { db } from './kvdex.ts'
 import { Post } from './kvdex.ts'
 import { z } from 'zod'
-import { handleCallback, signIn, signOut } from 'kv_oauth'
-import { oauth2Client } from '../utils/oauth2_client.ts'
+import { handleCallback, signIn, signOut, createGitHubOAuth2Client, getSessionId, getSessionAccessToken } from 'kv_oauth'
 import type { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch';
-// import { getSession } from 'next-auth/react';
 
-// type Context = inferAsyncReturnType<typeof createContext>;
+export const oauth2Client = createGitHubOAuth2Client()
+
 export const createContext =  ({
   req,
   resHeaders, 
@@ -19,6 +18,7 @@ export const createContext =  ({
     // sessionId,
   };
 };
+// type Context = inferAsyncReturnType<typeof createContext>;
 
 const t = initTRPC.context<typeof createContext>().create()
 
@@ -32,9 +32,18 @@ const authRouter = router({
     const { response } = await handleCallback(ctx.req, oauth2Client)
     return response
   }),
+  session: publicProcedure.query(async ({ctx}) => {
+    const sessionId = await getSessionId(ctx.req)
+    //     const isSignedIn = sessionId !== null
+    // const accessToken = isSignedIn
+    //   ? await getSessionAccessToken(oauth2Client, sessionId)
+    //   : null
+    return sessionId
+  }),
   signin: publicProcedure.query(async ({ctx}) => await signIn(ctx.req, oauth2Client)),
   signout: publicProcedure.query(async ({ctx}) => await signOut(ctx.req)),
 })
+
 const postRouter = router({
   create: publicProcedure
     .input(Post)

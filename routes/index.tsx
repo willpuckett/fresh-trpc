@@ -1,6 +1,6 @@
 import type { Handlers, PageProps } from '$fresh/server.ts'
 import { getSessionAccessToken, getSessionId } from 'kv_oauth'
-import { oauth2Client } from '../utils/oauth2_client.ts'
+import { oauth2Client } from '../trpc/router.ts'
 
 interface Data {
   isSignedIn: boolean
@@ -44,7 +44,7 @@ export default function HomePage(props: PageProps<Data>) {
         Your access token: {accessToken !== null
           ? (
             <span style='filter:blur(0px)'>
-              ${accessToken + ' (intentionally blurred for security)'}
+              {accessToken + ' (intentionally blurred for security)'}
             </span>
           )
           : '❌'}

@@ -10,8 +10,8 @@ export default function Header({ active }: {
     { name: "Server", href: "/server" },
     { name: "Client", href: "/client" },
     { name: "Query", href: "/query" },
-    { name: "Signin", href: "/trpc/auth/signin" },
-    { name: "Signout", href: "/trpc/auth/signout" },
+    { name: "Signin", href: "/api/auth/signin" },
+    { name: "Signout", href: "/api/auth/signout" },
   ];
 
   return (
