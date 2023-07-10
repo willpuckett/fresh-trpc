@@ -34,7 +34,6 @@ const router = t.router
 const middleware = t.middleware
 
 const loggerMiddleware = middleware(async (opts) => {
-  console.log('opts', opts)
   const start = Date.now()
   const result = await opts.next()
   const durationMs = Date.now() - start
@@ -50,6 +49,7 @@ const loggedProcedure = publicProcedure.use(loggerMiddleware)
 const authRouter = router({
   callback: loggedProcedure
     .query(async ({ ctx }) => {
+      console.log('callback ctx', ctx)
       // Return object also includes `accessToken` and `sessionId` properties.
       const { response } = await handleCallback(ctx.req, oauth2Client)
       console.log('response headers', response.headers)
@@ -64,11 +64,13 @@ const authRouter = router({
     return sessionId
   }),
   signin: loggedProcedure.query(async ({ ctx }) => {
+    console.log('signin ctx', ctx)
     const response = await signIn(ctx.req, oauth2Client)
     console.log('response headers', response.headers)
     return response
   }),
   signout: loggedProcedure.query(async ({ ctx }) => {
+    console.log('signout ctx', ctx)
     const response = await signOut(ctx.req)
     console.log('response headers', response.headers)
     return response
