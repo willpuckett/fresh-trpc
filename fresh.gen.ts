@@ -4,7 +4,7 @@
 
 import * as $0 from './routes/_app.tsx'
 import * as $1 from './routes/api/[trpc].ts'
-import * as $2 from './routes/api/callback.ts'
+import * as $2 from './routes/api/oauth.ts'
 import * as $3 from './routes/api/signin.ts'
 import * as $4 from './routes/api/signout.ts'
 import * as $5 from './routes/client.tsx'
@@ -19,7 +19,7 @@ const manifest = {
   routes: {
     './routes/_app.tsx': $0,
     './routes/api/[trpc].ts': $1,
-    './routes/api/callback.ts': $2,
+    './routes/api/oauth.ts': $2,
     './routes/api/signin.ts': $3,
     './routes/api/signout.ts': $4,
     './routes/client.tsx': $5,
