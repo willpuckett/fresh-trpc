@@ -2,20 +2,7 @@ import { initTRPC } from '@trpc/server'
 import { db } from './kvdex.ts'
 import { Post } from './kvdex.ts'
 import { z } from 'zod'
-import {
-  createGitHubOAuth2Client,
-  getSessionAccessToken as _getSessionAccessToken,
-  getSessionId,
-  handleCallback,
-  signIn,
-  signOut,
-} from 'kv_oauth'
 import type { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch'
-
-export const oauth2Client = createGitHubOAuth2Client({
-  clientId: Deno.env.get('GITHUB_CLIENT_ID')!,
-  clientSecret: Deno.env.get('GITHUB_CLIENT_SECRET')!,
-})
 
 export const createContext = ({
   req,
@@ -49,48 +36,48 @@ const loggerMiddleware = middleware(async (opts) => {
 
 const loggedProcedure = publicProcedure.use(loggerMiddleware)
 
-const authRouter = router({
-  callback: loggedProcedure
-    .query(async ({ ctx }) => {
-      console.log('callback ctx', ctx)
-      // Return object also includes `accessToken` and `sessionId` properties.
-      try {
+// const authRouter = router({
+//   callback: loggedProcedure
+//     .query(async ({ ctx }) => {
+//       console.log('callback ctx', ctx)
+//       // Return object also includes `accessToken` and `sessionId` properties.
+//       try {
 
-        const { response } = await handleCallback(ctx.req, oauth2Client)
-        console.log('callback response ', response)
-      } catch (error) {
-        console.log('callback error ', error)
-      }
-      // return response
-    }),
-  session: loggedProcedure.query(async ({ ctx }) => {
-    const sessionId = await getSessionId(ctx.req)
-    //     const isSignedIn = sessionId !== null
-    // const accessToken = isSignedIn
-    //   ? await getSessionAccessToken(oauth2Client, sessionId)
-    //   : null
-    return sessionId
-  }),
-  signin: loggedProcedure.query(async ({ ctx }) => {
-    console.log('signin ctx', ctx)
-    const response = await signIn(ctx.req, oauth2Client)
-    console.log('signin response ', response)
-    return response
-  }),
-  signout: loggedProcedure.query(async ({ ctx }) => {
-    console.log('signout ctx', ctx)
-    try {
+//         const { response } = await handleCallback(ctx.req, oauth2Client)
+//         console.log('callback response ', response)
+//       } catch (error) {
+//         console.log('callback error ', error)
+//       }
+//       // return response
+//     }),
+//   session: loggedProcedure.query(async ({ ctx }) => {
+//     const sessionId = await getSessionId(ctx.req)
+//     //     const isSignedIn = sessionId !== null
+//     // const accessToken = isSignedIn
+//     //   ? await getSessionAccessToken(oauth2Client, sessionId)
+//     //   : null
+//     return sessionId
+//   }),
+//   signin: loggedProcedure.query(async ({ ctx }) => {
+//     console.log('signin ctx', ctx)
+//     const response = await signIn(ctx.req, oauth2Client)
+//     console.log('signin response ', response)
+//     return response
+//   }),
+//   signout: loggedProcedure.query(async ({ ctx }) => {
+//     console.log('signout ctx', ctx)
+//     try {
 
-      const response = await signOut(ctx.req)
-      console.log('signout response ', response)
-      ctx.resHeaders.set('location', response.headers.get('location')!)
-      ctx.resHeaders.set('set-cookie', response.headers.get('set-cookie')!)
-    } catch (error) { 
-      console.log('signout error ', error)
-    }
-    console.log('signout response headers', ctx.resHeaders)
-  }),
-})
+//       const response = await signOut(ctx.req)
+//       console.log('signout response ', response)
+//       ctx.resHeaders.set('location', response.headers.get('location')!)
+//       ctx.resHeaders.set('set-cookie', response.headers.get('set-cookie')!)
+//     } catch (error) {
+//       console.log('signout error ', error)
+//     }
+//     console.log('signout response headers', ctx.resHeaders)
+//   }),
+// })
 
 const postRouter = router({
   create: loggedProcedure
@@ -106,7 +93,7 @@ const postRouter = router({
 })
 
 export const appRouter = router({
-  auth: authRouter,
+  // auth: authRouter,
   post: postRouter,
 })
 

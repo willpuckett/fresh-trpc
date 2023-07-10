@@ -4,13 +4,13 @@
 
 import * as $0 from './routes/_app.tsx'
 import * as $1 from './routes/api/[trpc].ts'
-import * as $2 from './routes/api/oauth.ts'
-import * as $3 from './routes/client.tsx'
-import * as $4 from './routes/index.tsx'
-import * as $5 from './routes/query.tsx'
-import * as $6 from './routes/server.tsx'
-import * as $7 from './routes/signin.ts'
-import * as $8 from './routes/signout.tsx'
+import * as $2 from './routes/api/callback.ts'
+import * as $3 from './routes/api/signin.ts'
+import * as $4 from './routes/api/signout.ts'
+import * as $5 from './routes/client.tsx'
+import * as $6 from './routes/index.tsx'
+import * as $7 from './routes/query.tsx'
+import * as $8 from './routes/server.tsx'
 import * as $$0 from './islands/ClientSide.tsx'
 import * as $$1 from './islands/Provider.tsx'
 import * as $$2 from './islands/Query.tsx'
@@ -19,13 +19,13 @@ const manifest = {
   routes: {
     './routes/_app.tsx': $0,
     './routes/api/[trpc].ts': $1,
-    './routes/api/oauth.ts': $2,
-    './routes/client.tsx': $3,
-    './routes/index.tsx': $4,
-    './routes/query.tsx': $5,
-    './routes/server.tsx': $6,
-    './routes/signin.ts': $7,
-    './routes/signout.tsx': $8,
+    './routes/api/callback.ts': $2,
+    './routes/api/signin.ts': $3,
+    './routes/api/signout.ts': $4,
+    './routes/client.tsx': $5,
+    './routes/index.tsx': $6,
+    './routes/query.tsx': $7,
+    './routes/server.tsx': $8,
   },
   islands: {
     './islands/ClientSide.tsx': $$0,
