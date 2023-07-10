@@ -54,9 +54,14 @@ const authRouter = router({
     .query(async ({ ctx }) => {
       console.log('callback ctx', ctx)
       // Return object also includes `accessToken` and `sessionId` properties.
-      const { response } = await handleCallback(ctx.req, oauth2Client)
-      console.log('callback response ', response)
-      return response
+      try {
+
+        const { response } = await handleCallback(ctx.req, oauth2Client)
+        console.log('callback response ', response)
+      } catch (error) {
+        console.log('callback error ', error)
+      }
+      // return response
     }),
   session: loggedProcedure.query(async ({ ctx }) => {
     const sessionId = await getSessionId(ctx.req)
@@ -74,10 +79,15 @@ const authRouter = router({
   }),
   signout: loggedProcedure.query(async ({ ctx }) => {
     console.log('signout ctx', ctx)
-    const response = await signOut(ctx.req)
-    console.log('signout response ', response)
-    ctx.resHeaders.set('location', response.headers.get('location')!)
-    ctx.resHeaders.set('set-cookie', response.headers.get('set-cookie')!)
+    try {
+
+      const response = await signOut(ctx.req)
+      console.log('signout response ', response)
+      ctx.resHeaders.set('location', response.headers.get('location')!)
+      ctx.resHeaders.set('set-cookie', response.headers.get('set-cookie')!)
+    } catch (error) { 
+      console.log('signout error ', error)
+    }
     console.log('signout response headers', ctx.resHeaders)
   }),
 })
