@@ -19,18 +19,18 @@ export default function Page({ data: { posts } }: PageProps<{
   posts: RouterOutput['post']['list']
 }>) {
   return (
-      <div>
-        <form>
-          <input class='border-1' type='text' name='post' />
-          <button class='border-1' type='submit'>Create Post</button>
-        </form>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>
-              {post.value.title} <a href={`/server?deleteID=${post.id}`}>⌫</a>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div>
+      <form>
+        <input class='border-1' type='text' name='post' />
+        <button class='border-1' type='submit'>Create Post</button>
+      </form>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>
+            {post.value.title} <a href={`/server?deleteID=${post.id}`}>⌫</a>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }

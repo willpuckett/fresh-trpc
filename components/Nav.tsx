@@ -1,34 +1,33 @@
-import BrandGithub from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/brand-github.tsx";
-import LemonIcon from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/lemon-2.tsx";
-
+import BrandGithub from 'https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/brand-github.tsx'
+import LemonIcon from 'https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/lemon-2.tsx'
 
 export default function Header({ active }: {
-  active: string;
+  active: string
 }) {
   const menus = [
-    { name: "🏠", href: "/" },
-    { name: "Server", href: "/server" },
-    { name: "Client", href: "/client" },
-    { name: "Query", href: "/query" },
-    { name: "Signin", href: "/api/auth/signin" },
-    { name: "Signout", href: "/api/auth/signout" },
-  ];
+    { name: '🏠', href: '/' },
+    { name: 'Server', href: '/server' },
+    { name: 'Client', href: '/client' },
+    { name: 'Query', href: '/query' },
+    { name: 'Signin', href: '/api/auth.signin' },
+    { name: 'Signout', href: '/api/auth.signout' },
+  ]
 
   return (
-    <div class="bg-white w-full max-w-screen-lg py-6 px-8 flex flex-col md:flex-row gap-4">
-      <div class="flex items-center flex-1">
+    <div class='bg-white w-full max-w-screen-lg py-6 px-8 flex flex-col md:flex-row gap-4'>
+      <div class='flex items-center flex-1'>
         <LemonIcon />
-        <div class="text-2xl  ml-1 font-bold">
+        <div class='text-2xl  ml-1 font-bold'>
           Fresh
         </div>
       </div>
-      <ul class="flex items-center gap-6">
+      <ul class='flex items-center gap-6'>
         {menus.map((menu) => (
           <li>
             <a
               href={menu.href}
-              class={"text-gray-500 hover:text-gray-700 py-1 border-gray-500" +
-                (menu.href === active ? " font-bold border-b-2" : "")}
+              class={'text-gray-500 hover:text-gray-700 py-1 border-gray-500' +
+                (menu.href === active ? ' font-bold border-b-2' : '')}
             >
               {menu.name}
             </a>
@@ -36,9 +35,8 @@ export default function Header({ active }: {
         ))}
       </ul>
     </div>
-  );
+  )
 }
-
 
 // type Props = {
 //   children: ComponentChildren;
@@ -47,40 +45,39 @@ export default function Header({ active }: {
 export function Footer() {
   const menus = [
     {
-      title: "OAuth Info",
+      title: 'OAuth Info',
       children: [
-        { name: "Getting Started", href: "#" },
-        { name: "Guide", href: "#" },
-        { name: "API", href: "#" },
-        { name: "Showcase", href: "#" },
-        { name: "Pricing", href: "#" },
+        { name: 'Getting Started', href: '#' },
+        { name: 'Guide', href: '#' },
+        { name: 'API', href: '#' },
+        { name: 'Showcase', href: '#' },
+        { name: 'Pricing', href: '#' },
       ],
     },
-
-  ];
+  ]
 
   return (
-    <div class="bg-white flex flex-col md:flex-row w-full max-w-screen-lg gap-8 md:gap-16 px-8 py-8 text-sm">
-      <div class="flex-1">
-        <div class="flex items-center gap-1">
-          <LemonIcon class="inline-block" />
-          <div class="font-bold text-2xl">
+    <div class='bg-white flex flex-col md:flex-row w-full max-w-screen-lg gap-8 md:gap-16 px-8 py-8 text-sm'>
+      <div class='flex-1'>
+        <div class='flex items-center gap-1'>
+          <LemonIcon class='inline-block' />
+          <div class='font-bold text-2xl'>
             Fresh tRPC OAuth
           </div>
         </div>
-        <div class="text-gray-500">
+        <div class='text-gray-500'>
           Full Stack Demo
         </div>
       </div>
 
       {menus.map((item) => (
-        <div class="mb-4" key={item.title}>
-          <div class="font-bold">{item.title}</div>
-          <ul class="mt-2">
+        <div class='mb-4' key={item.title}>
+          <div class='font-bold'>{item.title}</div>
+          <ul class='mt-2'>
             {item.children.map((child) => (
-              <li class="mt-2" key={child.name}>
+              <li class='mt-2' key={child.name}>
                 <a
-                  class="text-gray-500 hover:text-gray-700"
+                  class='text-gray-500 hover:text-gray-700'
                   href={child.href}
                 >
                   {child.name}
@@ -91,20 +88,15 @@ export function Footer() {
         </div>
       ))}
 
-      <div class="text-gray-500 space-y-2">
-
+      <div class='text-gray-500 space-y-2'>
         <a
-          href="https://github.com/willpuckett/fresh-trpc"
-          class="inline-block hover:text-black"
-          aria-label="GitHub"
+          href='https://github.com/willpuckett/fresh-trpc'
+          class='inline-block hover:text-black'
+          aria-label='GitHub'
         >
           <BrandGithub />
         </a>
       </div>
     </div>
-  );
+  )
 }
-
-
-
-
