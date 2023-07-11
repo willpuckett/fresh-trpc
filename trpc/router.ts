@@ -50,6 +50,8 @@ const loggedProcedure = publicProcedure.use(loggerMiddleware)
 //       }
 //       // return response
 //     }),
+// getUser:
+// curl -H "Authorization: Bearer OAUTH-TOKEN" https://api.github.com/user
 //   session: loggedProcedure.query(async ({ ctx }) => {
 //     const sessionId = await getSessionId(ctx.req)
 //     //     const isSignedIn = sessionId !== null
@@ -90,6 +92,12 @@ const postRouter = router({
   delete: loggedProcedure.input(z.string()).mutation(async ({ input }) => {
     await db.posts.delete(input)
   }),
+  setToken: loggedProcedure
+    .mutation(({ ctx }) => {
+      const token = '11234124213412341234231'
+      ctx.resHeaders.set('set-cookie', 'token=' + token + '; Path=/; HttpOnly')
+      return token
+    }),
 })
 
 export const appRouter = router({
