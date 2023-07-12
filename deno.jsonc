@@ -23,7 +23,7 @@
     "@trpc/server": "https://esm.sh/@trpc/server@10.34.0?bundle",
     "@trpc/server/": "https://esm.sh/@trpc/server@10.34.0&bundle/",
     "$fresh/": "https://deno.land/x/fresh@1.2.0/",
-    "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.1.0",
+    "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.2.0",
     // Make sure these versions are the same -->
     "preact": "https://esm.sh/preact@10.15.1?bundle",
     "preact/": "https://esm.sh/preact@10.15.1&bundle/",
