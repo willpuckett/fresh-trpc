@@ -30,8 +30,7 @@
     "react": "https://esm.sh/preact@10.15.1/compat",
     // <--
     "trpc-react-query": "https://esm.sh/*@trpc/react-query@10.29.0",
-    "twind": "https://esm.sh/twind@0.16.19",
-    "twind/": "https://esm.sh/twind@0.16.19/",
+    "@twind/": "https://esm.sh/@twind/",
     // "use-sync-external-store": "https://esm.sh/*use-sync-external-store@1.2.0?bundle",
     "zod": "https://esm.sh/zod@3.21.4",
     "kvdex": "https://deno.land/x/kvdex@v0.5.3/mod.ts",
