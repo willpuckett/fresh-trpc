@@ -88,7 +88,7 @@ const postRouter = router({
       const post = await db.posts.add(input)
       return post
     }),
-  list: loggedProcedure.query(async () => await db.posts.getMany()),
+  list: loggedProcedure.query(async () => (await db.posts.getMany()).result),
   delete: loggedProcedure.input(z.string()).mutation(async ({ input }) => {
     await db.posts.delete(input)
   }),
