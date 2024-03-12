@@ -1,41 +1,40 @@
 {
   "unstable": ["kv"],
+  "lock": false,
   "tasks": {
+    "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
     "start": "deno run -A --watch=static/,routes/ dev.ts",
     "pack": "deno fmt && deno lint && deno task start",
-    "esm:add": "deno run -A https://esm.sh/v124 add",
-    "esm:update": "deno run -A https://esm.sh/v124 update",
-    "esm:remove": "deno run -A https://esm.sh/v124 remove"
+    "update_fresh": "deno run -A -r https://fresh.deno.dev/update . ",
+    "update_udd": "deno run -A https://deno.land/x/udd/main.ts --dry-run deno.jsonc",
+    "update": "deno task update_fresh && deno task esm:update && deno task update_udd",
+    "esm:add": "deno run -A https://esm.sh/v135 add",
+    "esm:update": "deno run -A https://esm.sh/v135 update",
+    "esm:remove": "deno run -A https://esm.sh/v135 remove",
+    "build": "deno run -A dev.ts build",
+    "preview": "deno run -A main.ts"
   },
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact"
-  },
-  "fmt": {
-    "semiColons": false,
-    "singleQuote": true
-  },
+  "compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "preact" },
+  "fmt": { "semiColons": false, "singleQuote": true },
   "imports": {
-    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.3.1",
-    "@preact/signals": "https://esm.sh/*@preact/signals@1.1.5",
-    // "@tanstack/query-core": "https://esm.sh/@tanstack/query-core@4.29.19?bundle",
-    "@tanstack/react-query": "https://esm.sh/@tanstack/react-query@4.29.19?external=react",
-    "@trpc/client": "https://esm.sh/@trpc/client@10.45.2",
-    "@trpc/server": "https://esm.sh/@trpc/server@10.45.2",
-    "@trpc/server/": "https://esm.sh/@trpc/server@10.45.2/",
-    "$fresh/": "https://deno.land/x/fresh@1.3.0/",
+    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.0",
+    "@preact/signals": "https://esm.sh/*@preact/signals@1.2.1",
+    "@tanstack/react-query": "https://esm.sh/@tanstack/react-query@^4?external=react",
+    "@trpc/client": "https://esm.sh/@trpc/client",
+    "@trpc/server": "https://esm.sh/@trpc/server",
+    "@trpc/server/": "https://esm.sh/@trpc/server/",
+    "$fresh/": "https://deno.land/x/fresh@1.6.5/",
     "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.2.0",
-    // Make sure these versions are the same -->
-    "preact": "https://esm.sh/preact@10.15.1",
-    "preact/": "https://esm.sh/preact@10.15.1/",
-    "react": "https://esm.sh/preact@10.15.1/compat",
-    // <--
-    "trpc-react-query": "https://esm.sh/*@trpc/react-query@10.45.2",
+    "preact": "https://esm.sh/preact@10.19.2",
+    "preact/": "https://esm.sh/preact@10.19.2/",
+    "react": "https://esm.sh/preact@10.19.2/compat",
+    "trpc-react-query": "https://esm.sh/*@trpc/react-query",
     "@twind/": "https://esm.sh/@twind/",
-    // "use-sync-external-store": "https://esm.sh/*use-sync-external-store@1.2.0?bundle",
     "zod": "https://esm.sh/zod@3.21.4",
     "kvdex": "https://deno.land/x/kvdex@v0.5.3/mod.ts",
     "kv_oauth": "https://deno.land/x/deno_kv_oauth@v0.2.4/mod.ts"
   },
-  "scopes": {}
+  "scopes": {},
+  "lint": { "rules": { "tags": ["fresh", "recommended"] } },
+  "exclude": ["**/_fresh/*"]
 }
